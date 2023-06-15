@@ -34,9 +34,10 @@ namespace BusinessLayer.Concrete
              _headingDal.Insert(heading);
         }
 
-        public void HeadingDelete(Heading heading)
+        public void HeadingDelete(Heading heading)      //Silme işlemi yapmak bize sorun yaratabileceği için onun yerine durumunu false'a çekiyoruz.
         {
-            _headingDal.Delete(heading);
+            
+            _headingDal.Update(heading);
         }
 
         public void HeadingUpdate(Heading heading)

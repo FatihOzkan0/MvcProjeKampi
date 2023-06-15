@@ -17,6 +17,8 @@ namespace EntityLayer.Concrete
         public string ContentValue { get; set; }
         public  DateTime ContentDate { get; set; }
 
+        public bool ContentStatus { get; set; }
+
         public int HeadingID { get; set; }
         public virtual Heading Headings { get; set; }    //Heading Tablosu ile ilişkilendirdiğimiz içinn böyle yapıyoruz.
         public int? WriterID { get; set; }              //nullable type "?" tanımlıyoruz burayı.
