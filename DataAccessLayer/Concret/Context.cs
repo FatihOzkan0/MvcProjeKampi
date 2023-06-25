@@ -21,6 +21,8 @@ namespace DataAccessLayer.Concret
         public DbSet<Writer> Writers { get; set; }
         public DbSet<Message> Messages { get; set; }      //Bu Sınıfı projemize sonradan ekledik.
         public DbSet<ImageFile> ImageFiles { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+
 
 
 

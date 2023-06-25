@@ -8,13 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;   //Session işlemi için ekliyoruz.
 
 namespace MvcProjeKampi.Controllers
 {
     public class AdminCategoryController : Controller
     {
         CategoryManager cm = new CategoryManager(new EfCategoryDal());    //Burada EfCategoryDal kullanmamızın sebebi eğer ben projede EF kullanmayı bırakıp başka bir pakete geçersem bize kolaylık sağlaması için.
-        
+
+        [Authorize(Roles ="A")]   //Loginden Giriş Yapan Kullanıcılar Sadece erişebilir.Buna Role Ekledike sadece rolu B olanlar erişebilir
         public ActionResult Index()
         {
             var categoryList = cm.GetList();

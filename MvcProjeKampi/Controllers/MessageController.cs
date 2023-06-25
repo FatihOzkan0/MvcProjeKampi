@@ -15,6 +15,8 @@ namespace MvcProjeKampi.Controllers
     {
         MessageManager mm = new MessageManager(new EfMessageDal());
         MessageValidator messageValidator = new MessageValidator();     //Yeni Mesaj eklerken ki kısıtlarımızı eklemek için çağırıyoruz.
+
+        [Authorize]
         public ActionResult Inbox()         //Gelen Kutusu
         {
             var messageList = mm.GetListInbox();

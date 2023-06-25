@@ -10,6 +10,8 @@ namespace BusinessLayer.Abstract
     public interface IHeadingService
     {
         List<Heading> GetList();
+        List<Heading> GetListByWriter();           //Yazara Göre Listeleme yapıcak bu methot bunu da WriterPanelde kullanıcaz.
+
         void HeadingAdd(Heading heading);
         void HeadingDelete(Heading heading);
         void HeadingUpdate(Heading heading);

@@ -108,6 +108,10 @@
     <Compile Include="Migrations\202306201303208_mig_add_ımagefile.designer.cs">
       <DependentUpon>202306201303208_mig_add_ımagefile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306210909220_mg_add_admin.cs" />
+    <Compile Include="Migrations\202306210909220_mg_add_admin.designer.cs">
+      <DependentUpon>202306210909220_mg_add_admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306201303208_mig_add_ımagefile.resx">
       <DependentUpon>202306201303208_mig_add_ımagefile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306210909220_mg_add_admin.resx">
+      <DependentUpon>202306210909220_mg_add_admin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
