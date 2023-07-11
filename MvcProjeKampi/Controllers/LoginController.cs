@@ -9,6 +9,7 @@ using System.Web.Security;
 
 namespace MvcProjeKampi.Controllers
 {
+    [AllowAnonymous]      //Bu sayede erişim engelinden muaf tutuyoruz ve erişim olmayan sayfaya girince buraya yönlendiriyoruz.
     public class LoginController : Controller
     {
 
@@ -50,7 +51,7 @@ namespace MvcProjeKampi.Controllers
             if (writerUserInfo != null)
             {
                 FormsAuthentication.SetAuthCookie(writerUserInfo.WriteMail, false);       //Yetkilendirme işlemini yapıyoruz ve UserName yetki veriyoruz
-                Session["AdminUserName"] = writerUserInfo.WriteMail;
+                Session["WriteMail"] = writerUserInfo.WriteMail;
                 return RedirectToAction("MyContent", "WriterPanelContent");
             }
             else

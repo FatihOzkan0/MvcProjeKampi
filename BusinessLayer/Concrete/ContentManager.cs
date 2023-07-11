@@ -48,9 +48,9 @@ namespace BusinessLayer.Concrete
             return _contentDal.List(x=>x.HeadingID == id);       //Bana sadece seçili başlığın içeriğini getir.
         }
 
-        public List<Content> GetListByWriter()             //Bu methodu WriterPanelContent'de kullanıyoruz.
+        public List<Content> GetListByWriter(int id)             //Bu methodu WriterPanelContent'de kullanıyoruz.
         {
-            return _contentDal.List(x=>x.WriterID==5);
+            return _contentDal.List(x=>x.WriterID==id);
         }
     }
 }
