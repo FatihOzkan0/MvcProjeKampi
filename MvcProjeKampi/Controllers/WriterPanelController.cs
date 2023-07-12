@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concret;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
@@ -15,21 +16,29 @@ namespace MvcProjeKampi.Controllers
 
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
+        Context c = new Context();
+    
+
         public ActionResult WriterProfile()
         {
             return View();
         }
 
-        public ActionResult MyHeading()   //Burada Sadece Giren Yazarın kendi başlıklarını getiricem.
+        public ActionResult MyHeading(string p)   //Burada Sadece Giren Yazarın kendi başlıklarını getiricem.
         {
-
-            var values = hm.GetListByWriter();
+            
+            p = (string)Session["WriteMail"];
+            var writerIdInfo = c.Writers.Where(x => x.WriteMail == p).Select(y => y.WriterID).FirstOrDefault();
+          
+            var values = hm.GetListByWriter(writerIdInfo);
             return View(values);
         }
         [HttpGet]
         public ActionResult NewHeading()
         {
             //Burada dropDown yapıyoruz ve heading içinde bulunan categoryId nin name 'ini getiriyoruz.
+           
+
 
             List<SelectListItem> valueCategory = (from x in cm.GetList()            
                                                   select new SelectListItem
@@ -43,8 +52,14 @@ namespace MvcProjeKampi.Controllers
         [HttpPost]
         public ActionResult NewHeading(Heading p)
         {
+
+
+            string writerMailInfo = (string)Session["WriteMail"]; //Burada Session ile mail adresinden giriş yapanı tutuyoruz.
+            var writerIdInfo = c.Writers.Where(x => x.WriteMail == writerMailInfo).Select(y => y.WriterID).FirstOrDefault();   //Burada da mail adresi hangi yazarın ise onun Id sini alıyoruz.
+
+
             p.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            p.WriterID = 1;
+            p.WriterID =writerIdInfo;
             p.HeadingStatus = true;
             hm.HeadingAdd(p);
             return RedirectToAction("MyHeading");
@@ -77,6 +92,12 @@ namespace MvcProjeKampi.Controllers
             HeadingValue.HeadingStatus = false;
             hm.HeadingDelete(HeadingValue);
             return RedirectToAction("MyHeading");
+        }
+
+        public ActionResult AllHeading()
+        {
+            var headings = hm.GetList();
+            return View(headings);
         }
     }
 }
