@@ -17,9 +17,9 @@ namespace MvcProjeKampi.Controllers
         MessageValidator messageValidator = new MessageValidator();     //Yeni Mesaj eklerken ki kısıtlarımızı eklemek için çağırıyoruz.
 
         [Authorize]
-        public ActionResult Inbox()         //Gelen Kutusu
+        public ActionResult Inbox(string p)         //Gelen Kutusu
         {
-            var messageList = mm.GetListInbox();
+            var messageList = mm.GetListInbox(p);
             return View(messageList);
         }
 

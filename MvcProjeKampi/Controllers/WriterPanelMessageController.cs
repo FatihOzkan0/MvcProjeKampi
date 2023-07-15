@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concret;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -15,9 +16,12 @@ namespace MvcProjeKampi.Controllers
     {
         MessageManager mm = new MessageManager(new EfMessageDal());
         MessageValidator validator = new MessageValidator();
+        Context c = new Context();
         public ActionResult Inbox()
         {
-            var messageValues = mm.GetListInbox();
+            string p = (string)Session["WriteMail"];  //Session İşlemi ile sadece sisteme otantike olan yazara gelen mesajlar listeleniyor.
+            var writerIdInfo = c.Writers.Where(x=>x.WriteMail==p).Select(y=>y.WriterID).FirstOrDefault();
+            var messageValues = mm.GetListInbox(p);
             return View(messageValues);
         }
 

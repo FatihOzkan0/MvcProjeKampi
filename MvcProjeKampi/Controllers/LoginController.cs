@@ -60,5 +60,12 @@ namespace MvcProjeKampi.Controllers
             }
 
         }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();       //Oturuma Giriş yapan kullanıcıdan çıkar bilgilerini Siler.
+            Session.Abandon();                   //Oturumu Sonlandırır.
+            return RedirectToAction("Headings", "Default");
+        }
     }
 }

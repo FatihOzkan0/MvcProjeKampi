@@ -1,5 +1,8 @@
 ﻿@using EntityLayer.Concrete
-@model List<Heading>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Heading>    /*Paging ile sayfalama işlemi yapıcağımız için model olarak da pagedList ile listeliyoruz.*/
+
 @{
     ViewBag.Title = "AllHeading";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
@@ -117,13 +120,13 @@
                                         </i>
                                         Yazılar
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/WriterPanel/EditHeading/@item.HeadingID">
+                                    <a class="btn btn-info btn-sm" href="/WriterPanelContent/AddContent/@item.HeadingID">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Bu Başlığa Yaz
                                     </a>
 
-                                    
+
                                 </td>
                             </tr>
                         }
@@ -140,6 +143,14 @@
     </section>
 </body>
 </html>
+@Html.PagedListPager((IPagedList)Model,p=>Url.Action("AllHeading",new {p}), new PagedListRenderOptions
+{
+    LiElementClasses=new List<string>
+    { "page-link"}
+})
+
+@*PagedListimiz Modele bağlı çalışıcak.Her seferinde p parametresi ile url Action kullanarak AllHeadinge gidiceksin
+    .AllHeadinge giderkende p parameteresi oluşturarak git. Css düzeltmek için PagedListRenderOptions methodunu kullanıyoruz. *@
 
 
 
