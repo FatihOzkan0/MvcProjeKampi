@@ -16,18 +16,18 @@ namespace MvcProjeKampi.Controllers
     {
         MessageManager mm = new MessageManager(new EfMessageDal());
         MessageValidator validator = new MessageValidator();
-        Context c = new Context();
+        
         public ActionResult Inbox()
         {
             string p = (string)Session["WriteMail"];  //Session İşlemi ile sadece sisteme otantike olan yazara gelen mesajlar listeleniyor.
-            var writerIdInfo = c.Writers.Where(x=>x.WriteMail==p).Select(y=>y.WriterID).FirstOrDefault();
             var messageValues = mm.GetListInbox(p);
             return View(messageValues);
         }
 
         public ActionResult Sendbox()
         {
-            var messageValues = mm.GetListSendbox();
+            string p = (string)Session["WriteMail"];
+            var messageValues = mm.GetListSendbox(p);
             return View(messageValues);
         }
 
@@ -56,10 +56,11 @@ namespace MvcProjeKampi.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message p)
         {
+            string sender = (string)Session["WriteMail"];
             ValidationResult results = validator.Validate(p);
             if (results.IsValid)
             {
-                p.SenderMail = "admin@gmail.com";
+                p.SenderMail = sender;
                 p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());      //Ekleme İşlemi Yaparken bugünün Tarihini al.
                 mm.MessageAdd(p);
                 return RedirectToAction("Sendbox");

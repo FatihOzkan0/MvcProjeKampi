@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using BusinessLayer.ValidationRules;
+using FluentValidation.Results;
 
 namespace MvcProjeKampi.Controllers
 {
@@ -18,12 +20,38 @@ namespace MvcProjeKampi.Controllers
 
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
+        WriterManager wm = new WriterManager(new EfWriterDal());
         Context c = new Context();
-    
 
-        public ActionResult WriterProfile()
+        [HttpGet]
+        public ActionResult WriterProfile(int id=0)
         {
+           string p = (string)Session["WriteMail"];
+            id= c.Writers.Where(x => x.WriteMail == p).Select(y => y.WriterID).FirstOrDefault();
+            var writerValue = wm.GetByID(id);
+            return View(writerValue);
+        }
+        [HttpPost]
+        public ActionResult WriterProfile(Writer p)
+        {
+            WriterValidator writeValidator = new WriterValidator();
+            ValidationResult results = writeValidator.Validate(p);
+
+            if (results.IsValid)  //Eğer Sonuçlar geçerli ise.
+            {
+                wm.WriterUpdate(p);
+                return RedirectToAction("AllHeading","WriterPanel");    //Ekleme işlemini yap ve beni geri Index'e gönder
+            }
+            else
+            {
+                foreach (var x in results.Errors)
+                {
+                    ModelState.AddModelError(x.PropertyName, x.ErrorMessage);
+                }
+            }
             return View();
+
+
         }
 
         public ActionResult MyHeading(string p)   //Burada Sadece Giren Yazarın kendi başlıklarını getiricem.

@@ -23,9 +23,9 @@ namespace MvcProjeKampi.Controllers
             return View(messageList);
         }
 
-        public ActionResult Sendbox()      //Giden Kutusu
+        public ActionResult Sendbox(string p)      //Giden Kutusu
         {
-            var messageList = mm.GetListSendbox();
+            var messageList = mm.GetListSendbox(p);
             return View(messageList);
         }
 

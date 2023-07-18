@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Concret;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concret;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace MvcProjeKampi.Controllers
     [AllowAnonymous]      //Bu sayede erişim engelinden muaf tutuyoruz ve erişim olmayan sayfaya girince buraya yönlendiriyoruz.
     public class LoginController : Controller
     {
+        WriterLoginManager wm = new WriterLoginManager(new EfWriterDal());
 
         [HttpGet]
         public ActionResult Index()
@@ -46,11 +49,15 @@ namespace MvcProjeKampi.Controllers
         [HttpPost]
         public ActionResult WriterLogin(Writer p)
         {
-            Context context = new Context();
-            var writerUserInfo = context.Writers.FirstOrDefault(x => x.WriteMail == p.WriteMail && x.WriterPassword == p.WriterPassword);
+            //Context context = new Context();
+            //var writerUserInfo = context.Writers.FirstOrDefault(x => x.WriteMail == p.WriteMail && x.WriterPassword == p.WriterPassword);
+
+            var writerUserInfo = wm.GetWriter(p.WriteMail, p.WriterPassword);
+
+
             if (writerUserInfo != null)
             {
-                FormsAuthentication.SetAuthCookie(writerUserInfo.WriteMail, false);       //Yetkilendirme işlemini yapıyoruz ve UserName yetki veriyoruz
+                FormsAuthentication.SetAuthCookie(writerUserInfo.WriteMail, false);  //Yetkilendirme işlemini yapıyoruz ve UserName yetki veriyoruz
                 Session["WriteMail"] = writerUserInfo.WriteMail;
                 return RedirectToAction("MyContent", "WriterPanelContent");
             }
