@@ -38,7 +38,7 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Content> GetList()
+        public List<Content> GetList()           //Arama işlemi yaparak getirir.
         {
             return _contentDal.List();
         }
