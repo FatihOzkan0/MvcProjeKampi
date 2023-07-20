@@ -8,6 +8,7 @@
 
 <h2>Başlık Ekleme Sayfası</h2>
 
+
 @using (Html.BeginForm("NewHeading", "WriterPanel", FormMethod.Post))
 {
     <div class="form-group">
@@ -18,9 +19,15 @@
         @Html.Label("Kategori")
         @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.vlc, new { @class = "form-control" })
         <br />
-       
+
 
 
         <button class="btn btn-info">Başlığı oluştur</button>
+
+
     </div>
+
+
 }
+
+
