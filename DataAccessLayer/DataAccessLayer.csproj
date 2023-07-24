@@ -62,9 +62,7 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Abstract\IWriterDal.cs" />
     <Compile Include="Concret\Context.cs" />
-    <Compile Include="Concret\Repositories\CategoryRepository.cs" />
     <Compile Include="Concret\Repositories\GenericRepository.cs" />
-    <Compile Include="Concret\Repositories\WriterRepository.cs" />
     <Compile Include="EntityFramework\EfAboutDal.cs" />
     <Compile Include="EntityFramework\EfAdminDal.cs" />
     <Compile Include="EntityFramework\EfCategoryDal.cs" />

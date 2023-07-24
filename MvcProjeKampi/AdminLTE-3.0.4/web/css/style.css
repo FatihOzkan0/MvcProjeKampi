@@ -262,7 +262,7 @@ div#word-mark h1 a {
 /*-- /header --*/
 
 .banner_section {
-    background: url(../images/banner.jpg) no-repeat 0px 0px;
+    background: url(../images/arkaPlan.jpg) no-repeat 0px 0px;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -1458,7 +1458,7 @@ ul.social-icons li a:hover {
         font-size: 2.2em;
     }
 }
-
+/**/
 @media(max-width:600px) {
     h3.tittle-w3 {
         font-size: 2em;
@@ -1487,6 +1487,8 @@ ul.social-icons li a:hover {
         padding-left: 20px;
     }
 }
+
+/**/
 
 @media(max-width:568px) {
     .banner_section {
@@ -1542,6 +1544,8 @@ ul.social-icons li a:hover {
     }
     /**nav**/
 }
+
+/**/
 
 @media(max-width:480px) {
     .banner-info h3 {
@@ -1640,6 +1644,8 @@ ul.social-icons li a:hover {
     }
 }
 
+/**/
+
 @media(max-width:375px) {
     #brand {
         padding-left: 10px;
@@ -1662,6 +1668,8 @@ ul.social-icons li a:hover {
         font-size: 0.7em;
     }
 }
+
+/**/
 
 @media(max-width:320px) {
     .banner-info h3 {

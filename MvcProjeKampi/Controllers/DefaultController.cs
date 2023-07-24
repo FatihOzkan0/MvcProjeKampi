@@ -15,7 +15,7 @@ namespace MvcProjeKampi.Controllers
 
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         ContentManager cm = new ContentManager(new EfContentDal());
-        public PartialViewResult Index(int id = 0)          //Contentleri Bunun içine çekiyoruz.
+        public PartialViewResult Index(int id = 7)          //Contentleri Bunun içine çekiyoruz.
         {
             var contentList = cm.GetListByHeadingID(id);
             return PartialView(contentList);
